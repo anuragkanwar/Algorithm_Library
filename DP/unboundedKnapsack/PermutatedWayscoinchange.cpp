@@ -84,7 +84,7 @@ public:
     void cacl()
     {
         dp[0] = 1;
-
+        sort(v.begin(), v.end());
         for (int i = 1; i <= x; i++)
         {
             for (int k = 0; k < n; k++)
@@ -93,7 +93,7 @@ public:
                 {
                     dp[i] = (dp[i] + dp[i - v[k]]) % MOD;
                 }
-                printarr(x+1, dp);
+                printarr(x + 1, dp);
             }
         }
 

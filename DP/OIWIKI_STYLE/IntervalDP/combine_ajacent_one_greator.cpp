@@ -1,10 +1,6 @@
+#define _USE_MATH_DEFINES
 #include <bits/stdc++.h>
 using namespace std;
-
-#define deb(x) cout << #x << " = " << x << endl
-
-#define deb2(x, y) cout << #x << " = " << x << "\n" \
-                        << #y << "=" << y << endl
 
 #define debvec(v)         \
     cout << #v << " : ";  \
@@ -12,17 +8,16 @@ using namespace std;
         cout << x << " "; \
     cout << endl
 
-#define debwe(x) cout << #x << " = " << x
 #define check(x) cout << "--------" << x << endl
 
 #define fo(i, n) for (int i = 0; i < n; i++)
 #define Fo(i, k, n) for (int i = k; i < n; i++)
+#define all(x) (x).begin(), (x).end()
 
 #define pb push_back
 #define eb emplace_back
 #define mp make_pair
 #define ar array
-
 typedef long long ll;
 typedef pair<int, int> pii;
 typedef pair<ll, ll> pll;
@@ -70,6 +65,25 @@ typedef vector<vl> vvl;
         cout << endl;                 \
     }
 
+#define deb(args...)                             \
+    {                                            \
+        string _s = #args;                       \
+        replace(_s.begin(), _s.end(), ',', ' '); \
+        stringstream _ss(_s);                    \
+        istream_iterator<string> _it(_ss);       \
+        err(_it, args);                          \
+    }
+
+void err(istream_iterator<string> it)
+{
+}
+template <typename T, typename... Args>
+void err(istream_iterator<string> it, T a, Args... args)
+{
+    cout << *it << " = " << a << endl;
+    err(++it, args...);
+}
+
 const int mxn3 = 1e3 + 1;
 const int mxn5 = 1e5 + 1;
 const int mxn25 = 2e5 + 1;
@@ -81,45 +95,42 @@ class A
 public:
     void init()
     {
-        string str;
-        getline(cin, str);
+        int n;
+        cin >> n;
 
-        vi z(str.size());
-        z[0] = 0;
-        int l = 0, r = 0;
-        for (int i = 1; i < str.size(); i++)
+        vi v(n);
+        for (int &x : v)
         {
-            if (i > r) // outside box
+            cin >> x;
+        }
+
+        vvi dp(n + 1, vi(n + 1, 0));
+
+        int mx = 0;
+        for (int i = 0; i < n; i++)
+        {
+            dp[i][i] = v[i];
+            mx = max(mx, dp[i][i]);
+        }
+        for (int len = 0; len <= n; len++)
+        {
+            for (int i = 0; i <= n - len; i++)
             {
-                // do calc
-                l = r = i;
-                while (r < str.size() && str[r] == str[r - l])
+                int j = i + len;
+
+                for (int k = i + 1; k <= j; k++)
                 {
-                    r++;
-                }
-                r--;
-                z[i] = r - l + 1;
-            }
-            else
-            {
-                if (z[i - l] + i > r)
-                {
-                    l = i;
-                    while (r < str.size() && str[r] == str[r - l])
+                    if (dp[i][k - 1] == dp[k][j])
                     {
-                        r++;
+                        dp[i][j] = max(dp[i][j], dp[k][j] + 1);
                     }
-                    r--;
-                    z[i] = r - l + 1;
-                }
-                else
-                {
-                    z[i] = z[i - l];
+
+                    mx = max(mx, dp[i][j]);
                 }
             }
         }
 
-        debvec(z);
+        cout << mx;
     }
 } obj;
 
@@ -132,5 +143,6 @@ int main()
 }
 
 /*
-aabxaabxcaabxaabzay
+
+
 */
