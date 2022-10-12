@@ -98,6 +98,7 @@ public:
         {
             int u = s.front();
             s.pop();
+
             while (adj[u].size())
             {
                 int np = adj[u].back();
@@ -108,6 +109,8 @@ public:
                     s.push(np);
                 }
             }
+
+
             ans.pb(u);
         }
 
@@ -115,7 +118,7 @@ public:
 
         for (auto x : indeg)
         {
-            if (x ^ 0)
+            if (x != 0)
             {
                 ok = false;
             }

@@ -1,13 +1,13 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define deb(x) cout << #x << " = " << x << endl
+#define deb(np) cout << #np << " = " << np << endl
 
-#define deb2(x, y) cout << #x << " = " << x << "\n" \
-                        << #y << "=" << y << endl
+#define deb2(np, y) cout << #np << " = " << np << "\n" \
+                         << #y << "=" << y << endl
 
-#define debwe(x) cout << #x << " = " << x
-#define check(x) cout << "--------" << x << endl
+#define debwe(np) cout << #np << " = " << np
+#define check(np) cout << "--------" << np << endl
 
 #define fo(i, n) for (int i = 0; i < n; i++)
 #define Fo(i, k, n) for (int i = k; i < n; i++)
@@ -30,15 +30,15 @@ typedef vector<vl> vvl;
     ll temp; \
     cin >> temp;
 
-#define printvec(v)       \
-    for (auto x : v)      \
-        cout << x << " "; \
+#define printvec(v)        \
+    for (auto np : v)      \
+        cout << np << " "; \
     cout << endl
 
 #define print2dvec(v)         \
-    for (auto x : v)          \
+    for (auto np : v)         \
     {                         \
-        for (auto y : x)      \
+        for (auto y : np)     \
         {                     \
             cout << y << " "; \
         }                     \
@@ -62,7 +62,7 @@ typedef vector<vl> vvl;
         cout << endl;                 \
     }
 
-const int mxn = 1e3;
+const int mnpn = 1e3;
 const ll MXN = 1e9 + 1;
 #define MOD 1e9 + 7;
 
@@ -95,15 +95,15 @@ public:
         for (ll i = 0; i < n; i++)
         {
             indicator = -1;
-            for (auto x : edges)
+            for (auto &np : edges)
             {
-                if (dist[x.second.first] != LLONG_MAX)
+                if (dist[np.second.first] != LLONG_MAX)
                 {
-                    if (dist[x.second.first] + x.first < dist[x.second.second])
+                    if (dist[np.second.first] + np.first < dist[np.second.second])
                     {
-                        dist[x.second.second] = max(LLONG_MIN, dist[x.second.first] + x.first);
-                        parent[x.second.second] = x.second.first;
-                        indicator = x.second.second;
+                        dist[np.second.second] = max(LLONG_MIN, dist[np.second.first] + np.first);
+                        parent[np.second.second] = np.second.first;
+                        indicator = np.second.second;
                     }
                 }
             }

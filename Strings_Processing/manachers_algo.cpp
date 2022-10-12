@@ -140,6 +140,33 @@ public:
         deb(count_total);
         deb(mx_odd_length);
         deb(mx_even_length);
+
+        // shoter algo with Z-algo like structure;
+        // z = 0 is for even lengths
+        int mx_length = -1;
+        vector<vector<int>> p(2, vector<int>(n, 0));
+        for (int z = 0, l = 0, r = -1; z < 2; z++, l = 0, r = -1)
+        {
+            for (int i = 0; i < n; i++)
+            {
+                if (i < r)
+                    p[z][i] = min(r - i, p[z][l + r - i + !z]);
+
+                int LL = i - p[z][i] - !z, RR = i + p[z][i];
+
+                while (LL >= 0 && RR < n && str[LL] == str[RR])
+                    p[z][i]++, LL--, RR++;
+
+                if (RR > r)
+                    l = LL, r = RR;
+
+                mx_length = max(mx_length, ((p[z][i] << 1) - z));
+            }
+        }
+        deb(mx_length);
+        printvec(d1);
+        printvec(d2);
+        print2dvec(p);
     }
 } obj;
 
