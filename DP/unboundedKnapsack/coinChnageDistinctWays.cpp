@@ -116,6 +116,23 @@ public:
             }
         }
 
+        /*
+
+        Space optmized version (concept of rolling Arrays):
+        vl dp(sum+1, 0);
+        dp[0] = 1;
+        for(int i = 0 ; i < N; i++)
+        {
+            for(int j = 0; j <= sum ; j++)
+            {
+                if(coins[i] <= j)
+                    dp[j] += dp[j-coins[i]];
+            }
+        }
+        return dp[sum];
+
+        */
+
         print2darr(n + 1, sum + 1, dp);
     }
 
