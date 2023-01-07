@@ -94,31 +94,39 @@ class A
 public:
     void init()
     {
-        int n;
-        cin >> n;
 
-        bool isPrime = true;
-
-        if (n % 2 == 0)
+        
+        for (int i = 2; i < 1000; i++)
         {
-            isPrime = false;
-        }
 
-        if (isPrime && n % 3 == 0)
-        {
-            isPrime = false;
-        }
+            int n = i;
 
-        for (int i = 5; isPrime && i * i <= n; i += 6)
-        {
-            if (n % i == 0 || n % i + 2 == 0)
+            bool isPrime = true;
+
+            if (n % 2 == 0)
             {
                 isPrime = false;
-                break;
+            }
+
+            if (isPrime && n % 3 == 0)
+            {
+                isPrime = false;
+            }
+
+            for (int i = 5; isPrime && i * i <= n; i += 6)
+            {
+                if (n % i == 0 || n % (i + 2) == 0)
+                {
+                    isPrime = false;
+                    break;
+                }
+            }
+
+            if(isPrime)
+            {
+                cout << n << "\n";
             }
         }
-
-        cout << (isPrime ? "Yes\n" : "No\n");
     }
 } obj;
 
